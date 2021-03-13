@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/warningFragment">
+
+    <fragment
+        android:id="@+id/warningFragment"
+        android:name="com.chibee.allergy.WarningFragment"
+        android:label="fragment_warning"
+        tools:layout="@layout/fragment_warning" >
+        <action
+            android:id="@+id/action_warningFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.chibee.allergy.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_patientFragment"
+            app:destination="@id/patientFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_alertFragment"
+            app:destination="@id/alertFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/patientFragment"
+        android:name="com.chibee.allergy.PatientFragment"
+        android:label="fragment_patient"
+        tools:layout="@layout/fragment_patient" >
+        <action
+            android:id="@+id/action_patientFragment_to_createAllergyFragment"
+            app:destination="@id/createAllergyFragment" />
+        <action
+            android:id="@+id/action_patientFragment_to_allergyFragment"
+            app:destination="@id/allergyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createAllergyFragment"
+        android:name="com.chibee.allergy.CreateAllergyFragment"
+        android:label="fragment_create_allergy"
+        tools:layout="@layout/fragment_create_allergy" />
+    <fragment
+        android:id="@+id/allergyFragment"
+        android:name="com.chibee.allergy.AllergyFragment"
+        android:label="fragment_allergy"
+        tools:layout="@layout/fragment_allergy" >
+        <action
+            android:id="@+id/action_allergyFragment_to_chartFragment"
+            app:destination="@id/chartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chartFragment"
+        android:name="com.chibee.allergy.ChartFragment"
+        android:label="fragment_chart"
+        tools:layout="@layout/fragment_chart" />
+    <fragment
+        android:id="@+id/alertFragment"
+        android:name="com.chibee.allergy.AlertFragment"
+        android:label="fragment_alert"
+        tools:layout="@layout/fragment_alert" />
+</navigation>
