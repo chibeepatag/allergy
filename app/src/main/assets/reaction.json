@@ -1,0 +1,29 @@
+[
+  {"system": "", "reaction": "Anaphylaxis"},
+  {"system": "Skin", "reaction": "Rash"},
+  {"system": "Skin", "reaction": "Urticaria/Hives/Welts"},
+  {"system": "Skin", "reaction": "Jaundice"},
+  {"system": "Pulmonary", "reaction":  "Shortness of breath/Difficulty breathing"},
+  {"system": "Pulmonary", "reaction":  "Asthma attack"},
+  {"system": "Pulmonary", "reaction":  "Cough"},
+  {"system": "Pulmonary", "reaction":  "Coughing blood/Haemoptysis"},
+  {"system": "Gastrointestinal", "reaction": "Nausea"},
+  {"system": "Gastrointestinal", "reaction": "Vomiting"},
+  {"system": "Gastrointestinal", "reaction": "Diarrhoea"},
+  {"system": "Gastrointestinal", "reaction": "Taste change"},
+  {"system": "Kidney", "reaction": "Blood in urine/ Haematuria}"
+  {"system": "Cardiac", "reaction": "Chest pain}"
+  {"system": "Cardiac", "reaction": "Heart attack}"
+  {"system": "Cardiac", "reaction": "Collapse}"
+  {"system": "Blood", "reaction": "Neutropenia"},
+  {"system": "Blood", "reaction": "Leukopenia"},
+  {"system": "Blood", "reaction": "Anaemia"},
+  {"system": "Blood", "reaction": "Bleeding"},
+  {"system": "Neurological", "reaction": "Confusion"},
+  {"system": "Neurological", "reaction": "Numbness"},
+  {"system": "Neurological", "reaction": "Tingling"},
+  {"system": "Neurological", "reaction": "Seizure"},
+  {"system": "Neurological", "reaction": "Hearing loss"},
+  {"system": "Musculoskeletal", "reaction": "Myalgia/ muscle pain"},
+  {"system": "Musculoskeletal", "reaction": "Weakness"}
+]

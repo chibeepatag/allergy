@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'androidx.navigation.safeargs'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -46,7 +47,24 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.3'
+    implementation 'androidx.work:work-runtime:2.3.4'
+    implementation "androidx.work:work-runtime-ktx:$rootProject.workVersion"
+    implementation "androidx.room:room-ktx:$rootProject.version_room"
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+
+    // Room and Lifecycle dependencies
+    implementation "androidx.room:room-runtime:$version_room"
+    kapt "androidx.room:room-compiler:$version_room"
+    implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_coroutine"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_coroutine"
+
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$version_lifecycle"
+    implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
 }

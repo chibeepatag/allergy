@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
+import com.chibee.allergy.data.AllergyDatabase
+import com.chibee.allergy.data.PatientDao
 import com.chibee.allergy.databinding.FragmentPatientBinding
 
 
@@ -27,6 +29,9 @@ class PatientFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val binding: FragmentPatientBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_patient, container, false)
+        val application = requireNotNull(this.activity).application
+        val patientDao: PatientDao = AllergyDatabase.getInstance(application).patientDao()
+        val patients = patientDao.getPatients()
         binding.addAllergy.setOnClickListener{
             val toAddAllergy = PatientFragmentDirections.actionPatientFragmentToCreateAllergyFragment()
             findNavController().navigate(toAddAllergy)

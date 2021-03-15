@@ -1,12 +1,15 @@
 package com.chibee.allergy
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
+import com.chibee.allergy.data.AllergyDatabase
+import com.chibee.allergy.data.PatientDao
 import com.chibee.allergy.databinding.FragmentHomeBinding
 
 
@@ -34,6 +37,11 @@ class HomeFragment : Fragment() {
         binding.alertsBtn.setOnClickListener{
             val toAlertFragment = HomeFragmentDirections.actionHomeFragmentToAlertFragment()
             findNavController().navigate(toAlertFragment)
+        }
+
+        binding.setupBtn.setOnClickListener{
+            val toSetupFragment = HomeFragmentDirections.actionHomeFragmentToSetupFragment()
+            findNavController().navigate(toSetupFragment)
         }
         return binding.root
     }

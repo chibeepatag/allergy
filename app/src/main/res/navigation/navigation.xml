@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_homeFragment_to_alertFragment"
             app:destination="@id/alertFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_setupFragment"
+            app:destination="@id/setupFragment" />
     </fragment>
     <fragment
         android:id="@+id/patientFragment"
@@ -62,4 +65,8 @@
         android:name="com.chibee.allergy.AlertFragment"
         android:label="fragment_alert"
         tools:layout="@layout/fragment_alert" />
+    <fragment
+        android:id="@+id/setupFragment"
+        android:name="com.chibee.allergy.SetupFragment"
+        android:label="SetupFragment" />
 </navigation>
