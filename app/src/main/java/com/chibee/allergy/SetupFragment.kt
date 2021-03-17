@@ -39,9 +39,10 @@ class SetupFragment : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory).get(SetupViewModel::class.java)
         binding.setupViewModel = viewModel
 
-        viewModel.navigateToHome.observe(viewLifecycleOwner,  Observer{ navigate ->
+        viewModel.navigateToPatient.observe(viewLifecycleOwner,  Observer{ navigate ->
             if(navigate){
-                findNavController().navigateUp()
+                val toPatient = SetupFragmentDirections.actionSetupFragmentToPatientFragment(2)
+                findNavController().navigate(toPatient)
                 viewModel.doneNavigating()
             }
 

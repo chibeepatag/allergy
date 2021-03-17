@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_warningFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_warningFragment_to_setupFragment"
+            app:destination="@id/setupFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -25,9 +28,6 @@
         <action
             android:id="@+id/action_homeFragment_to_alertFragment"
             app:destination="@id/alertFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_setupFragment"
-            app:destination="@id/setupFragment" />
     </fragment>
     <fragment
         android:id="@+id/patientFragment"
@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_patientFragment_to_allergyFragment"
             app:destination="@id/allergyFragment" />
+        <argument
+            android:name="patient_id"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/createAllergyFragment"
@@ -68,5 +71,9 @@
     <fragment
         android:id="@+id/setupFragment"
         android:name="com.chibee.allergy.SetupFragment"
-        android:label="SetupFragment" />
+        android:label="SetupFragment" >
+        <action
+            android:id="@+id/action_setupFragment_to_patientFragment"
+            app:destination="@id/patientFragment" />
+    </fragment>
 </navigation>

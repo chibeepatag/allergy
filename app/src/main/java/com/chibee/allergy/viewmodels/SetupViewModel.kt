@@ -18,16 +18,16 @@ class SetupViewModel(private val database: PatientDao): ViewModel() {
     val patientDob: LiveData<Long>
         get() = _patientDob
 
-    private val _navigateToHome = MutableLiveData<Boolean>()
-    val navigateToHome: LiveData<Boolean>
-        get() = _navigateToHome
+    private val _navigateToPatient = MutableLiveData<Boolean>()
+    val navigateToPatient: LiveData<Boolean>
+        get() = _navigateToPatient
 
     fun onDone(){
         viewModelScope.launch {
             val patient = Patient(patientName = patientName.value!!, dateOfBirth = 87878L, sex = patientSex.value!!)
            // val patient = Patient(patientName = "Hyun Bin", dateOfBirth = 87878L, sex = "M")
             insert(patient)
-            _navigateToHome.value = true
+            _navigateToPatient.value = true
         }
     }
     suspend fun insert(patient: Patient){
@@ -37,6 +37,6 @@ class SetupViewModel(private val database: PatientDao): ViewModel() {
     }
 
     fun doneNavigating() {
-        _navigateToHome.value = false
+        _navigateToPatient.value = false
     }
 }

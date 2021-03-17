@@ -1,15 +1,15 @@
 package com.chibee.allergy.viewmodels
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.chibee.allergy.data.AllergyDatabase
 import com.chibee.allergy.data.Patient
 import com.chibee.allergy.data.PatientDao
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class PatientViewModel(private val patientId: Long, val database: PatientDao): ViewModel() {
+class HomeViewModel(val database: PatientDao, val patientId: Long): ViewModel() {
     var patient = MutableLiveData<Patient>()
 
     init {
@@ -18,7 +18,14 @@ class PatientViewModel(private val patientId: Long, val database: PatientDao): V
 
     private fun initializePatient() {
         viewModelScope.launch {
-            patient.value = database.getPatient(patientId)
+            patient.value = getPatient()
+        }
+    }
+
+    suspend private fun getPatient(): Patient {
+        return withContext(Dispatchers.IO) {
+            var _patient = database.getPatient(patientId)
+            return@withContext _patient
         }
     }
 }

@@ -10,7 +10,7 @@ import androidx.work.WorkManager
 import com.chibee.allergy.utilities.DATABASE_NAME
 import com.chibee.allergy.workers.SeedDatabaseWorker
 
-@Database(entities = [Allergy::class, Drug::class, Intervention::class, Patient::class, Reaction::class], version = 1, exportSchema = false)
+@Database(entities = [Allergy::class, Drug::class, Intervention::class, Patient::class, Reaction::class], version = 1, exportSchema = true)
 abstract class AllergyDatabase: RoomDatabase(){
     abstract fun allergyDao(): AllergyDao
     abstract fun drugDao(): DrugDao
@@ -32,15 +32,7 @@ abstract class AllergyDatabase: RoomDatabase(){
         // https://medium.com/google-developers/7-pro-tips-for-room-fbadea4bfbd1#4785
         private fun buildDatabase(context: Context): AllergyDatabase {
             return Room.databaseBuilder(context, AllergyDatabase::class.java, DATABASE_NAME)
-                .addCallback(
-                    object : RoomDatabase.Callback() {
-                        override fun onCreate(db: SupportSQLiteDatabase) {
-                            super.onCreate(db)
-                            val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>().build()
-                            WorkManager.getInstance(context).enqueue(request)
-                        }
-                    }
-                )
+                .createFromAsset("allergy-db.db")
                 .build()
         }
     }

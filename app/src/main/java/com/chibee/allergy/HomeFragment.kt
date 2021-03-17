@@ -6,11 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.chibee.allergy.data.AllergyDatabase
 import com.chibee.allergy.data.PatientDao
 import com.chibee.allergy.databinding.FragmentHomeBinding
+import com.chibee.allergy.viewmodels.HomeViewModel
+import com.chibee.allergy.viewmodels.HomeViewModelFactory
 
 
 /**
@@ -29,9 +33,13 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding: FragmentHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        val application = requireNotNull(this.activity).application
+        val datasource = AllergyDatabase.getInstance(application).patientDao()
+        val viewModelFactory = HomeViewModelFactory(datasource, 2L)
+        val homeViewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
         binding.informationBtn.setOnClickListener {
-            val toInformation = HomeFragmentDirections.actionHomeFragmentToPatientFragment()
-            findNavController().navigate(toInformation)
+            val toInformation = HomeFragmentDirections.actionHomeFragmentToPatientFragment(2)
+           findNavController().navigate(toInformation)
         }
 
         binding.alertsBtn.setOnClickListener{
@@ -39,10 +47,6 @@ class HomeFragment : Fragment() {
             findNavController().navigate(toAlertFragment)
         }
 
-        binding.setupBtn.setOnClickListener{
-            val toSetupFragment = HomeFragmentDirections.actionHomeFragmentToSetupFragment()
-            findNavController().navigate(toSetupFragment)
-        }
         return binding.root
     }
 
