@@ -32,8 +32,8 @@ class SetupFragment : Fragment() {
         val binding: FragmentSetupBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_setup, container, false)
 
-        val application = requireNotNull(this.activity).application
-        val database = AllergyDatabase.getInstance(application).patientDao()
+        val application = requireNotNull(this.activity).application as AllergyApplication
+        val database = application.database.patientDao()
         val viewModelFactory =  SetupViewModelFactory(database)
 
         val viewModel = ViewModelProvider(this, viewModelFactory).get(SetupViewModel::class.java)

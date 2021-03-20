@@ -33,12 +33,16 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding: FragmentHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        val application = requireNotNull(this.activity).application
-        val datasource = AllergyDatabase.getInstance(application).patientDao()
-        val viewModelFactory = HomeViewModelFactory(datasource, 2L)
+        val application = requireNotNull(this.activity).application as AllergyApplication
+
+        val datasource = application.database
+        val viewModelFactory = HomeViewModelFactory(datasource.patientDao())
         val homeViewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
+        binding.homeViewModel = homeViewModel
         binding.informationBtn.setOnClickListener {
-            val toInformation = HomeFragmentDirections.actionHomeFragmentToPatientFragment(2)
+            val toInformation = HomeFragmentDirections.actionHomeFragmentToPatientFragment(
+                homeViewModel.patient.value!!.patientId
+            )
            findNavController().navigate(toInformation)
         }
 

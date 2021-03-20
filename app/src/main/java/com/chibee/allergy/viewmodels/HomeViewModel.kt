@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class HomeViewModel(val database: PatientDao, val patientId: Long): ViewModel() {
+class HomeViewModel(val database: PatientDao): ViewModel() {
     var patient = MutableLiveData<Patient>()
 
     init {
@@ -24,7 +24,7 @@ class HomeViewModel(val database: PatientDao, val patientId: Long): ViewModel() 
 
     suspend private fun getPatient(): Patient {
         return withContext(Dispatchers.IO) {
-            var _patient = database.getPatient(patientId)
+            var _patient = database.getPatient()
             return@withContext _patient
         }
     }

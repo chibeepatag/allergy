@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class Reaction(
     @PrimaryKey
     @ColumnInfo(name="id")
-    var reactionId: Long,
+    var reactionId: Long = 0L,
     val system: String,
     val reaction: String
 ) {

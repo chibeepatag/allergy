@@ -3,4 +3,5 @@
     <dimen name="warning">50sp</dimen>
     <dimen name="headers">25sp</dimen>
     <dimen name="padding">16dp</dimen>
+    <dimen name="margin">16dp</dimen>
 </resources>

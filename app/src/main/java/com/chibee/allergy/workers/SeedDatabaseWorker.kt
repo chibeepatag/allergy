@@ -26,8 +26,8 @@ class SeedDatabaseWorker(
                     val drugType = object : TypeToken<List<Drug>>() {}.type
                     val drugList: List<Drug> = Gson().fromJson(jsonReader, drugType)
 
-                    val database = AllergyDatabase.getInstance(applicationContext)
-                    database.drugDao().insertAll(drugList)
+                    //val database = AllergyDatabase.getInstance(applicationContext)
+                    //database.drugDao().insertAll(drugList)
                     Result.success()
                 }
             }

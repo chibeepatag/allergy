@@ -8,7 +8,10 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.chibee.allergy.utilities.DATABASE_NAME
+import com.chibee.allergy.utilities.DBSeed
 import com.chibee.allergy.workers.SeedDatabaseWorker
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Database(entities = [Allergy::class, Drug::class, Intervention::class, Patient::class, Reaction::class], version = 1, exportSchema = true)
 abstract class AllergyDatabase: RoomDatabase(){
@@ -18,22 +21,42 @@ abstract class AllergyDatabase: RoomDatabase(){
     abstract fun patientDao(): PatientDao
     abstract fun reactionDao(): ReactionDao
 
+    private class AllergyDatabaseCallback(
+        private val scope: CoroutineScope
+    ) : RoomDatabase.Callback() {
+        override fun onCreate(db: SupportSQLiteDatabase) {
+            super.onCreate(db)
+            instance?.let { database ->
+                scope.launch {
+                    populateDatabase(database.drugDao(), database.reactionDao())
+                }
+            }
+        }
+
+        suspend fun populateDatabase(drugDao: DrugDao, reactionDao: ReactionDao) {
+            val drugs = DBSeed.getDrugs()
+            drugDao.insertAll(drugs)
+            val reactions = DBSeed.getReactions()
+            reactionDao.insertAll(reactions)
+        }
+    }
+
     companion object {
         // For Singleton instantiation
         @Volatile private var instance: AllergyDatabase? = null
 
-        fun getInstance(context: Context): AllergyDatabase {
+        fun getInstance(context: Context, scope: CoroutineScope): AllergyDatabase {
             return instance ?: synchronized(this) {
-                instance ?: buildDatabase(context).also { instance = it }
+                instance ?: buildDatabase(context, scope).also { instance = it }
             }
         }
 
-        // Create and pre-populate the database. See this article for more details:
-        // https://medium.com/google-developers/7-pro-tips-for-room-fbadea4bfbd1#4785
-        private fun buildDatabase(context: Context): AllergyDatabase {
+        private fun buildDatabase(context: Context, scope: CoroutineScope): AllergyDatabase {
             return Room.databaseBuilder(context, AllergyDatabase::class.java, DATABASE_NAME)
-                .createFromAsset("allergy-db.db")
+                .addCallback(AllergyDatabaseCallback(scope))
                 .build()
         }
     }
+
+
 }

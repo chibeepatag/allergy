@@ -10,8 +10,11 @@ interface PatientDao {
     @Query("SELECT * FROM patients")
     fun getPatients(): LiveData<List<Patient>>
 
-    @Query("SELECT * FROM patients WHERE id = :id")
-    fun getPatient(id: Long): Patient
+    @Query("SELECT * FROM patients order by id desc limit 1")
+    fun getPatient(): Patient
+
+    @Query("SELECT * from patients where id = :id")
+    fun getPatient(id: Long): LiveData<Patient>
 
     @Insert
     fun insert(patient: Patient)

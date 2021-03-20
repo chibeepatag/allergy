@@ -27,20 +27,17 @@ class WarningFragment : Fragment() {
 
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding: FragmentWarningBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_warning, container, false)
-
-        val application = requireNotNull(this.activity).application
-        val datasource = AllergyDatabase.getInstance(application).patientDao()
+        val application = requireNotNull(this.activity).application as AllergyApplication
+        val datasource = application.database.patientDao()
         val viewModelFactory = WarningViewModelFactory(datasource)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(WarningViewModel::class.java)
 
         viewModel.navigateToHome.observe(viewLifecycleOwner, Observer {
-            Log.i("WarningFragment", "navigateToHome: " + it.toString())
             if (it == true) {
                 this.findNavController().navigate(WarningFragmentDirections.actionWarningFragmentToHomeFragment())
                 viewModel.doneNavigating()
@@ -48,18 +45,15 @@ class WarningFragment : Fragment() {
         })
 
         viewModel.navigateToSetup.observe(viewLifecycleOwner, Observer {
-            Log.i("WarningFragment", "navigateToSetup: " + it.toString())
             if (it == true) {
                 this.findNavController().navigate(WarningFragmentDirections.actionWarningFragmentToSetupFragment())
                 viewModel.doneNavigating()
             }
         })
         binding.warningAcceptBtn.setOnClickListener{
-            Log.i("WarningFragment", "Accept button clicked")
             viewModel.onAccept()
-            Toast.makeText(context, "hey soul sistah", Toast.LENGTH_SHORT).show()
         }
-        // Inflate the layout for this fragment
+        binding.lifecycleOwner = this
         return binding.root
     }
 

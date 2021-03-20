@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.chibee.allergy.data.PatientDao
 
 class HomeViewModelFactory (
-    private val dataSource: PatientDao, private val patientId: Long) : ViewModelProvider.Factory {
+    private val dataSource: PatientDao) : ViewModelProvider.Factory {
         @Suppress("unchecked_cast")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
-                return HomeViewModel(dataSource, patientId) as T
+                return HomeViewModel(dataSource) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }
