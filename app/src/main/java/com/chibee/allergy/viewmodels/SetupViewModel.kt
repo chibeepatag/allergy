@@ -39,4 +39,12 @@ class SetupViewModel(private val database: PatientDao): ViewModel() {
     fun doneNavigating() {
         _navigateToPatient.value = false
     }
+
+    fun onClickMale(){
+        patientSex.value = "Male"
+    }
+
+    fun onClickFemale(){
+        patientSex.value = "Female"
+    }
 }

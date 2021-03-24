@@ -14,7 +14,6 @@
         android:layout_height="match_parent"
         tools:context=".WarningFragment">
 
-        <!-- TODO: Update blank fragment layout -->
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
@@ -38,7 +37,15 @@
             android:text="@string/accept"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/goToSetup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go to Setup"
+            app:layout_constraintBaseline_toBaselineOf="@+id/warningAcceptBtn"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/textView3"

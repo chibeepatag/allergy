@@ -28,10 +28,8 @@ class SetupFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val binding: FragmentSetupBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_setup, container, false)
-
         val application = requireNotNull(this.activity).application as AllergyApplication
         val database = application.database.patientDao()
         val viewModelFactory =  SetupViewModelFactory(database)
@@ -48,7 +46,6 @@ class SetupFragment : Fragment() {
 
         })
         binding.setLifecycleOwner(this)
-
         return binding.root
     }
 }

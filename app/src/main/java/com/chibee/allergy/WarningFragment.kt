@@ -53,6 +53,11 @@ class WarningFragment : Fragment() {
         binding.warningAcceptBtn.setOnClickListener{
             viewModel.onAccept()
         }
+
+        binding.goToSetup.setOnClickListener{
+            Log.i("WarningFragment", "go to setup clicked")
+            viewModel.navigateToSetup()
+        }
         binding.lifecycleOwner = this
         return binding.root
     }

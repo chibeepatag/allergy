@@ -70,13 +70,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/patientDobLabel">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextPatientSex"
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:checkedButton="@+id/radio_button_male"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin"
-                android:inputType="textPersonName"
-                android:text="@={setupViewModel.patientSex}" />
+                android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/radio_button_male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/male"
+                android:onClick="@{() -> setupViewModel.onClickMale()}"/>
+            <RadioButton
+                android:id="@+id/radio_button_female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female"
+                android:onClick="@{() -> setupViewModel.onClickFemale()}"/>/>
+            </RadioGroup>
         </com.google.android.material.textfield.TextInputLayout>
 
 

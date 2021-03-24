@@ -36,6 +36,13 @@ class WarningViewModel(private val database: PatientDao) : ViewModel() {
         Log.i("WarningViewModel", navigateToSetup.value.toString())
     }
 
+
+    fun navigateToSetup(){
+        _navigateToHome.value = false
+        _navigateToSetup.value = true
+        Log.i("WarningViewModel nts", navigateToHome.value.toString())
+    }
+
     suspend private fun getPatientCount(): Int {
         return withContext(Dispatchers.IO) {
             val patientCount = database.getPatientCount()

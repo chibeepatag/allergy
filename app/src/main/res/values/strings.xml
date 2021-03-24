@@ -23,4 +23,6 @@
     <string name="done">Done</string>
     <string name="share">Share</string>
     <string name="print">Print</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
 </resources>
