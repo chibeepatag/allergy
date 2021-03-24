@@ -22,6 +22,9 @@ class SetupViewModel(private val database: PatientDao): ViewModel() {
     val navigateToPatient: LiveData<Boolean>
         get() = _navigateToPatient
 
+    init{
+        patientSex.value = "Male"
+    }
     fun onDone(){
         viewModelScope.launch {
             val patient = Patient(patientName = patientName.value!!, dateOfBirth = patientDob.value!!, sex = patientSex.value!!)

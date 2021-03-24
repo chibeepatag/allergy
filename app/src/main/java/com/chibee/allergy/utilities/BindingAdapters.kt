@@ -6,8 +6,8 @@ import androidx.databinding.BindingAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 
-@BindingAdapter("app:birthdate")
-fun birthdate(view: TextView, dob: Long){
+@BindingAdapter("app:dateFromLong")
+fun dateFromLong(view: TextView, dob: Long){
     val date = Date(dob)
     val format = SimpleDateFormat("yyyy/MM/dd")
     val formattedDate = format.format(date)

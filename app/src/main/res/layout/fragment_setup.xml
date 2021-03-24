@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin"
                 android:inputType="date"
-                app:birthdate="@{setupViewModel.patientDob}"
+                app:dateFromLong="@{setupViewModel.patientDob}"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
