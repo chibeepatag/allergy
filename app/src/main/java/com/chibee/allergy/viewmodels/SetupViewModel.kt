@@ -24,8 +24,7 @@ class SetupViewModel(private val database: PatientDao): ViewModel() {
 
     fun onDone(){
         viewModelScope.launch {
-            val patient = Patient(patientName = patientName.value!!, dateOfBirth = 87878L, sex = patientSex.value!!)
-           // val patient = Patient(patientName = "Hyun Bin", dateOfBirth = 87878L, sex = "M")
+            val patient = Patient(patientName = patientName.value!!, dateOfBirth = patientDob.value!!, sex = patientSex.value!!)
             insert(patient)
             _navigateToPatient.value = true
         }
@@ -46,5 +45,9 @@ class SetupViewModel(private val database: PatientDao): ViewModel() {
 
     fun onClickFemale(){
         patientSex.value = "Female"
+    }
+
+    fun onSetDob(timeInMills: Long){
+        _patientDob.value = timeInMills
     }
 }
