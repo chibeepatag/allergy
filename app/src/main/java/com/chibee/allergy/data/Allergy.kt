@@ -11,9 +11,9 @@ foreignKeys = [
     ForeignKey(entity = Drug::class,     parentColumns = ["id"], childColumns = ["drug_id"]),
     ForeignKey(entity = Reaction::class, parentColumns = ["id"], childColumns = ["reaction_id"])])
 data class Allergy(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name="id")
-    val allergyId: Long,
+    val allergyId: Long = 0L,
     @ColumnInfo(name="patient_id")
     val patientId: Long,
     @ColumnInfo(name="drug_id")

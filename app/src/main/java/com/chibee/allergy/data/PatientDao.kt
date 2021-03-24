@@ -13,7 +13,7 @@ interface PatientDao {
     @Query("SELECT * FROM patients order by id desc limit 1")
     fun getPatient(): Patient
 
-    @Query("SELECT * from patients where id = :id")
+    @Query("SELECT * FROM patients where id = :id")
     fun getPatient(id: Long): LiveData<Patient>
 
     @Insert

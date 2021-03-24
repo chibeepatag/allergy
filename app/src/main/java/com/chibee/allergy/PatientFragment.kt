@@ -37,12 +37,11 @@ class PatientFragment : Fragment() {
         val arguments = PatientFragmentArgs.fromBundle(requireArguments())
 
         val viewModelFactory = PatientViewModelFactory(patientDao, arguments.patientId)
-        Log.i("Patient Fragment", arguments.patientId.toString())
         val patientViewModel = ViewModelProvider(this, viewModelFactory).get(PatientViewModel::class.java)
         binding.patientViewModel = patientViewModel
 
         binding.addAllergy.setOnClickListener{
-            val toAddAllergy = PatientFragmentDirections.actionPatientFragmentToCreateAllergyFragment()
+            val toAddAllergy = PatientFragmentDirections.actionPatientFragmentToCreateAllergyFragment(patientViewModel.patient.value!!.patientId)
             findNavController().navigate(toAddAllergy)
         }
         //replace with view model

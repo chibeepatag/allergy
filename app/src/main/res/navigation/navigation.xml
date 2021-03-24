@@ -48,7 +48,11 @@
         android:id="@+id/createAllergyFragment"
         android:name="com.chibee.allergy.CreateAllergyFragment"
         android:label="fragment_create_allergy"
-        tools:layout="@layout/fragment_create_allergy" />
+        tools:layout="@layout/fragment_create_allergy" >
+        <argument
+            android:name="patientId"
+            app:argType="long" />
+    </fragment>
     <fragment
         android:id="@+id/allergyFragment"
         android:name="com.chibee.allergy.AllergyFragment"

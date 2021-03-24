@@ -25,4 +25,9 @@
     <string name="print">Print</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
+    <string name="date_of_reaction">Date of Reaction</string>
+    <string name="severity">Severity</string>
+    <string name="systems">Systems Involved</string>
+    <string name="interventions">Interventions</string>
+    <string name="alert_device">Alert Device</string>
 </resources>
