@@ -9,9 +9,7 @@ import com.chibee.allergy.data.AllergyDao
 import com.chibee.allergy.data.Reaction
 
 class CreateAllergyViewModel(val allergyDao: AllergyDao, private val patientId: Long): ViewModel(){
-    val drugId = MutableLiveData<String>()
-    //val drugId: LiveData<Long>
-    //    get() = _drugId
+    val drug = MutableLiveData<String>()
 
     val _takenStart = MutableLiveData<Long>()
     val takenStart: LiveData<Long>
@@ -37,9 +35,14 @@ class CreateAllergyViewModel(val allergyDao: AllergyDao, private val patientId: 
     //    get() = _interventions
 
     fun onDone(){
-        drugId.value?.toString()?.let { Log.i("CreateAllergyViewModel", it) }
+        drug.value?.let{
+            Log.i("CreateAllergyViewModel", it)
+        }
         interventions.value?.toString()?.let { Log.i("CreateAllergyViewModel", it) }
-        val allergy = Allergy(patientId = patientId)
-        allergyDao.insert(allergy)
+        val allergy = Allergy(
+            patientId = patientId,
+            drug = drug.value!!
+        )
+       // allergyDao.insert(allergy)
     }
 }
