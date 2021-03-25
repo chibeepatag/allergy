@@ -15,11 +15,11 @@ fun dateFromLong(view: TextView, dob: Long){
     view.setText(formattedDate)
 }
 
-@BindingAdapter("app:drugDateRange")
-fun drugDateRange(view: TextView, viewModel: CreateAllergyViewModel){
-    if(viewModel.takenStart.value != null && viewModel.takenEnd.value != null){
-        val start = Date(viewModel.takenStart.value!!)
-        val end = Date(viewModel.takenEnd.value!!)
+@BindingAdapter(value = ["app:takenStart", "app:takenEnd"])
+fun drugDateRange(view: TextView, takenStart: Long?, takenEnd: Long?){
+    if(takenStart != null && takenEnd != null){
+        val start = Date(takenStart!!)
+        val end = Date(takenEnd!!)
         val format = SimpleDateFormat("yyyy/MM/dd")
         val formattedDateStart = format.format(start)
         val formattedDateEnd = format.format(end)
