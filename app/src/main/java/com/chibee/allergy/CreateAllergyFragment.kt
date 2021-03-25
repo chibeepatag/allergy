@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.chibee.allergy.data.AllergyDao
@@ -15,12 +16,14 @@ import com.chibee.allergy.viewmodels.CreateAllergyViewModelFactory
 
 class CreateAllergyFragment : Fragment() {
 
+    private var _binding: FragmentCreateAllergyBinding? = null
+    private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding: FragmentCreateAllergyBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_create_allergy, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_create_allergy, container, false)
         val application = requireNotNull(this.activity).application as AllergyApplication
 
         val allergyDao: AllergyDao = application.database.allergyDao()
@@ -34,5 +37,10 @@ class CreateAllergyFragment : Fragment() {
         return binding.root
     }
 
-
+    override fun onResume() {
+        super.onResume()
+        val drugs = arrayOf("Drug 1", "Drug 2", "Drug 3", "Drug 4")
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.drug_dropdown_item, drugs)
+        binding.drugAutoCompleteTextView.setAdapter(arrayAdapter)
+    }
 }

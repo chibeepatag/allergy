@@ -17,7 +17,7 @@
     <string name="patient_dob_label">Date of Birth</string>
     <string name="patient_sex_label">Sex</string>
     <string name="patient_allergies_title">Allergies</string>
-    <string name="create_allergy_drug_label">Drug</string>
+    <string name="drug">Drug</string>
     <string name="date_taken">Date Taken</string>
     <string name="chart">chart</string>
     <string name="done">Done</string>
