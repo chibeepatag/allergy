@@ -40,7 +40,21 @@ class CreateAllergyFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         val drugs = resources.getStringArray(R.array.drugs)
-        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.drug_dropdown_item, drugs)
-        binding.drugAutoCompleteTextView.setAdapter(arrayAdapter)
+        val arrayDrugAdapter = ArrayAdapter(requireContext(), R.layout.drug_dropdown_item, drugs)
+        binding.drugAutoCompleteTextView.setAdapter(arrayDrugAdapter)
+
+        val systems = resources.getStringArray(R.array.systems)
+        val arraySystemAdapter = ArrayAdapter(requireContext(), R.layout.drug_dropdown_item, systems)
+        binding.systemAutoCompleteTextView.setAdapter(arraySystemAdapter)
+
+        val reactions = resources.getStringArray(R.array.reactions)
+        val arrayReactionsAdapter = ArrayAdapter(requireContext(), R.layout.drug_dropdown_item, reactions)
+        binding.reactionAutoCompleteTextView.setAdapter(arrayReactionsAdapter)
+
+        val severity = resources.getStringArray(R.array.severity)
+        val arraySeverityAdapter = ArrayAdapter(requireContext(), R.layout.drug_dropdown_item, severity)
+        binding.severityAutoCompleteTextView.setAdapter(arraySeverityAdapter)
+
+        resources.getStringArray(R.array.severity)
     }
 }

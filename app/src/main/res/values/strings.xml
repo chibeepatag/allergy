@@ -27,6 +27,7 @@
     <string name="female">Female</string>
     <string name="date_of_reaction">Date of Reaction</string>
     <string name="severity">Severity</string>
+    <string name="reaction">Reaction</string>
     <string name="systems">Systems Involved</string>
     <string name="interventions">Interventions</string>
     <string name="alert_device">Alert Device</string>
@@ -60,5 +61,48 @@
         <item>Tobramycin</item>
         <item>Amikacin</item>
         <item>Nitrofurantoin</item>
+    </string-array>
+    <string-array name="systems">
+        <item>Skin</item>
+        <item>Gastrointestinal</item>
+        <item>Kidney</item>
+        <item>Pulmonary</item>
+        <item>Cardiac</item>
+        <item>Blood</item>
+        <item>Neurological</item>
+        <item>Musculoskeletal</item>
+    </string-array>
+    <string-array name="reactions">
+        <item>Jaundice</item>
+        <item>Urticaria/Hives/Welts</item>
+        <item>Rash</item>
+        <item>Anaphylaxis</item>
+        <item>Shortness of breath/Difficulty breathing</item>
+        <item>Asthma attack</item>
+        <item>Cough</item>
+        <item>Coughing blood/Haemoptysis</item>
+        <item>Nausea</item>
+        <item>Vomiting</item>
+        <item>Diarrhoea</item>
+        <item>Taste change</item>
+        <item>Blood in urine/ Haematuria</item>
+        <item>Chest pain</item>
+        <item>Heart attack</item>
+        <item>Collapse</item>
+        <item>Neutropenia</item>
+        <item>Leukopenia</item>
+        <item>Anaemia</item>
+        <item>Bleeding</item>
+        <item>Confusion</item>
+        <item>Numbness</item>
+        <item>Tingling</item>
+        <item>Seizure</item>
+        <item>Hearing loss</item>
+        <item>Myalgia/ muscle pain</item>
+        <item>Weakness</item>
+    </string-array>
+    <string-array name="severity">
+        <item>Mild</item>
+        <item>Severe</item>
     </string-array>
 </resources>

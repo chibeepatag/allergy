@@ -4,9 +4,13 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.chibee.allergy.data.Allergy
 import com.chibee.allergy.data.AllergyDao
 import com.chibee.allergy.data.Reaction
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CreateAllergyViewModel(val allergyDao: AllergyDao, private val patientId: Long): ViewModel(){
     val drug = MutableLiveData<String>()
@@ -25,14 +29,10 @@ class CreateAllergyViewModel(val allergyDao: AllergyDao, private val patientId: 
 
 
     val severity = MutableLiveData<String>()
-    //val severity: LiveData<String>
-    //    get() = _severity
-    //val _systemsInvolved = MutableLiveData<List<Reaction>>()
-    //val systemsInvolved: LiveData<List<Reaction>>
-    //    get() = _systemsInvolved
+    val system = MutableLiveData<String>()
+    val reaction =  MutableLiveData<String>()
     val interventions =  MutableLiveData<String>()
-    //val interventions: LiveData<String>
-    //    get() = _interventions
+
 
     fun onDone(){
         drug.value?.let{
@@ -41,8 +41,20 @@ class CreateAllergyViewModel(val allergyDao: AllergyDao, private val patientId: 
         interventions.value?.toString()?.let { Log.i("CreateAllergyViewModel", it) }
         val allergy = Allergy(
             patientId = patientId,
-            drug = drug.value!!
+            drug = drug.value!!,
+            severity = severity.value!!,
+            system = system.value!!,
+            reaction = reaction.value!!,
+            intervention =  interventions.value!!
         )
-       // allergyDao.insert(allergy)
+        viewModelScope.launch {
+            insert(allergy)
+        }
+    }
+
+    suspend fun insert(allergy: Allergy){
+        withContext(Dispatchers.IO){
+            allergyDao.insert(allergy)
+        }
     }
 }

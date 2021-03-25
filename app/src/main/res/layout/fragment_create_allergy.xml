@@ -58,32 +58,45 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/severityLabel"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/severity">
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/severityEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin" />
+        <AutoCompleteTextView
+            android:id="@+id/severityAutoCompleteTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@={viewModel.severity}"
+            android:hint="@string/severity"/>
         </com.google.android.material.textfield.TextInputLayout>
-
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/systemLabel"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/systems">
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/systemEditText"
+            <AutoCompleteTextView
+                android:id="@+id/systemAutoCompleteTextView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin" />
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@={viewModel.system}"
+                android:hint="@string/systems"/>
         </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+        <AutoCompleteTextView
+            android:id="@+id/reactionAutoCompleteTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@={viewModel.reaction}"
+            android:hint="@string/reaction"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/interventionsLabel"
@@ -91,7 +104,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/interventions">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/interventionsEditText"
                 android:layout_width="match_parent"
