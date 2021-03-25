@@ -39,7 +39,7 @@ class CreateAllergyFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val drugs = arrayOf("Drug 1", "Drug 2", "Drug 3", "Drug 4")
+        val drugs = resources.getStringArray(R.array.drugs)
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.drug_dropdown_item, drugs)
         binding.drugAutoCompleteTextView.setAdapter(arrayAdapter)
     }

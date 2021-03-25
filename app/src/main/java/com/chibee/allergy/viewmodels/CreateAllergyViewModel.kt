@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.chibee.allergy.data.Allergy
 import com.chibee.allergy.data.AllergyDao
 import com.chibee.allergy.data.Reaction
 
@@ -38,5 +39,7 @@ class CreateAllergyViewModel(val allergyDao: AllergyDao, private val patientId: 
     fun onDone(){
         drugId.value?.toString()?.let { Log.i("CreateAllergyViewModel", it) }
         interventions.value?.toString()?.let { Log.i("CreateAllergyViewModel", it) }
+        val allergy = Allergy(patientId = patientId)
+        allergyDao.insert(allergy)
     }
 }

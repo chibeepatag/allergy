@@ -5,18 +5,14 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
 import com.chibee.allergy.utilities.DATABASE_NAME
 import com.chibee.allergy.utilities.DBSeed
-import com.chibee.allergy.workers.SeedDatabaseWorker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [Allergy::class, Drug::class, Intervention::class, Patient::class, Reaction::class], version = 1, exportSchema = true)
+@Database(entities = [Allergy::class, Intervention::class, Patient::class, Reaction::class], version = 1, exportSchema = true)
 abstract class AllergyDatabase: RoomDatabase(){
     abstract fun allergyDao(): AllergyDao
-    abstract fun drugDao(): DrugDao
     abstract fun interventionDao(): InterventionDao
     abstract fun patientDao(): PatientDao
     abstract fun reactionDao(): ReactionDao
@@ -28,14 +24,12 @@ abstract class AllergyDatabase: RoomDatabase(){
             super.onCreate(db)
             instance?.let { database ->
                 scope.launch {
-                    populateDatabase(database.drugDao(), database.reactionDao())
+                    populateDatabase(database.reactionDao())
                 }
             }
         }
 
-        suspend fun populateDatabase(drugDao: DrugDao, reactionDao: ReactionDao) {
-            val drugs = DBSeed.getDrugs()
-            drugDao.insertAll(drugs)
+        suspend fun populateDatabase(reactionDao: ReactionDao) {
             val reactions = DBSeed.getReactions()
             reactionDao.insertAll(reactions)
         }

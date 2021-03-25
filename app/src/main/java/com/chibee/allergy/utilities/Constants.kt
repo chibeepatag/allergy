@@ -1,6 +1,5 @@
 package com.chibee.allergy.utilities
 
-import com.chibee.allergy.data.Drug
 import com.chibee.allergy.data.Reaction
 
 /**
@@ -14,6 +13,7 @@ const val REACTION_DATA_FILENAME = "reaction.json"
 
 class DBSeed() {
     companion object {
+        /*
         fun getDrugs(): List<Drug>{
             val drugs = ArrayList<Drug>()
             drugs.add(Drug(category = "Penicillins", name = "Penicillin G"))
@@ -45,6 +45,7 @@ class DBSeed() {
             drugs.add(Drug(category = "Nitrofurans",        name =  "Nitrofurantoin"))
             return drugs
         }
+         */
 
         fun getReactions(): List<Reaction>{
             val reactions = ArrayList<Reaction>()

@@ -30,4 +30,35 @@
     <string name="systems">Systems Involved</string>
     <string name="interventions">Interventions</string>
     <string name="alert_device">Alert Device</string>
+
+
+    <string-array name="drugs">
+        <item>Penicillin G</item>
+        <item>Ampicillin</item>
+        <item>Amoxicillin</item>
+        <item>Amoxicillin-clavulanate</item>
+        <item>Ampicillin-sulbactam</item>
+        <item>Piperacillin-tazobactam</item>
+        <item>Cefazolin</item>
+        <item>Ceftriaxone</item>
+        <item>Ceftazidime</item>
+        <item>Cefepime</item>
+        <item>Ceftaroline</item>
+        <item>Doxycycline</item>
+        <item>Minocycline</item>
+        <item>Tigecycline</item>
+        <item>Erythromycin</item>
+        <item>Azithromycin</item>
+        <item>Clarithromycin</item>
+        <item>Vancomycin</item>
+        <item>Daptomycin</item>
+        <item>Linezolid</item>
+        <item>Clindamycin</item>
+        <item>Trimethoprim-sulfamethoxazole</item>
+        <item>Metronidazole</item>
+        <item>Gentamicin</item>
+        <item>Tobramycin</item>
+        <item>Amikacin</item>
+        <item>Nitrofurantoin</item>
+    </string-array>
 </resources>
