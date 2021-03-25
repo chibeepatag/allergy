@@ -68,11 +68,6 @@ class SetupFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             month = cal.get(Calendar.MONTH)
             year = cal.get(Calendar.YEAR)
 
-            val datePicker =
-                MaterialDatePicker.Builder.datePicker()
-                    .setTitleText("Birthdate")
-                    .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-                    .build()
             DatePickerDialog(requireContext(), R.style.spinnerDatePickerStyle, this, year, month, day).show()
         }
     }
