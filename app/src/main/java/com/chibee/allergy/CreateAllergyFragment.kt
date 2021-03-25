@@ -1,23 +1,31 @@
 package com.chibee.allergy
 
+import android.app.DatePickerDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.DatePicker
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.chibee.allergy.data.AllergyDao
 import com.chibee.allergy.databinding.FragmentCreateAllergyBinding
 import com.chibee.allergy.viewmodels.CreateAllergyViewModel
 import com.chibee.allergy.viewmodels.CreateAllergyViewModelFactory
+import com.google.android.material.datepicker.MaterialDatePicker
+import java.util.*
 
 
 class CreateAllergyFragment : Fragment() {
 
     private var _binding: FragmentCreateAllergyBinding? = null
     private val binding get() = _binding!!
+
+    private var viewModel: CreateAllergyViewModel? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,14 +37,46 @@ class CreateAllergyFragment : Fragment() {
         val allergyDao: AllergyDao = application.database.allergyDao()
         val arguments = CreateAllergyFragmentArgs.fromBundle(requireArguments())
         val viewModelFactory = CreateAllergyViewModelFactory(allergyDao, arguments.patientId)
-        val viewModel = ViewModelProvider(this, viewModelFactory).get(CreateAllergyViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(CreateAllergyViewModel::class.java)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
+        setupDates()
 
         return binding.root
     }
+    private fun setupDates(){
+        val cal: Calendar = Calendar.getInstance()
+        val day = cal.get(Calendar.DAY_OF_MONTH)
+        val month = cal.get(Calendar.MONTH)
+        val year = cal.get(Calendar.YEAR)
+        var supportFragmentManager = requireNotNull(this.activity).getSupportFragmentManager()
+        binding.dateTakenEditText.setOnClickListener{
+            val dateRangePicker =
+                MaterialDatePicker.Builder.dateRangePicker()
+                    .setInputMode(MaterialDatePicker.INPUT_MODE_TEXT)
+                    .setTitleText("Drug Taken On")
+                    .build()
+            dateRangePicker.addOnPositiveButtonClickListener {
+                if ( it.first != null && it.second != null){
+                    val start = it.first
+                    val end = it.second
+                    viewModel!!.onSetDateTaken(start!!, end!!)
+                }
+            }
 
+            dateRangePicker.show(supportFragmentManager, "drugDatesTaken")
+        }
+        binding.dateReactionEditText.setOnClickListener{
+            val reactionDatePicker = MaterialDatePicker.Builder.datePicker()
+                .setInputMode(MaterialDatePicker.INPUT_MODE_TEXT)
+                .setTitleText("Reaction Dates")
+                .build()
+            reactionDatePicker.addOnPositiveButtonClickListener {
+                viewModel?.onSetReactionDate(it)
+            }
+            reactionDatePicker.show(supportFragmentManager, "reactionDate")
+        }
+    }
     override fun onResume() {
         super.onResume()
         val drugs = resources.getStringArray(R.array.drugs)

@@ -45,7 +45,10 @@ class CreateAllergyViewModel(val allergyDao: AllergyDao, private val patientId: 
             severity = severity.value!!,
             system = system.value!!,
             reaction = reaction.value!!,
-            intervention =  interventions.value!!
+            intervention =  interventions.value!!,
+            startTaken = takenStart.value!!,
+            endTaken = takenEnd.value!!,
+            dateReaction = reactionDate.value!!
         )
         viewModelScope.launch {
             insert(allergy)
@@ -56,5 +59,14 @@ class CreateAllergyViewModel(val allergyDao: AllergyDao, private val patientId: 
         withContext(Dispatchers.IO){
             allergyDao.insert(allergy)
         }
+    }
+
+    fun onSetReactionDate(timeInMills: Long){
+        _reactionDate.value = timeInMills
+    }
+
+    fun onSetDateTaken(start: Long, end: Long){
+        _takenStart.value = start
+        _takenEnd.value = end
     }
 }
