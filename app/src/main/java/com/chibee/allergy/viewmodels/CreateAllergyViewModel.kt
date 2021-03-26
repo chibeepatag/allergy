@@ -33,6 +33,10 @@ class CreateAllergyViewModel(val allergyDao: AllergyDao, private val patientId: 
     val reaction =  MutableLiveData<String>()
     val interventions =  MutableLiveData<String>()
 
+    private val _navigateBackToPatient = MutableLiveData<Boolean>()
+    val navigateBackToPatient: LiveData<Boolean>
+        get() = _navigateBackToPatient
+
 
     fun onDone(){
         drug.value?.let{
@@ -58,6 +62,7 @@ class CreateAllergyViewModel(val allergyDao: AllergyDao, private val patientId: 
     suspend fun insert(allergy: Allergy){
         withContext(Dispatchers.IO){
             allergyDao.insert(allergy)
+            _navigateBackToPatient.postValue(true)
         }
     }
 
@@ -68,5 +73,9 @@ class CreateAllergyViewModel(val allergyDao: AllergyDao, private val patientId: 
     fun onSetDateTaken(start: Long, end: Long){
         _takenStart.value = start
         _takenEnd.value = end
+    }
+
+    fun doneNavigating(){
+        _navigateBackToPatient.value = false
     }
 }

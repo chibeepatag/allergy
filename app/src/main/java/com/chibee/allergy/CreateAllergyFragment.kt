@@ -10,13 +10,15 @@ import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.chibee.allergy.data.AllergyDao
 import com.chibee.allergy.databinding.FragmentCreateAllergyBinding
 import com.chibee.allergy.viewmodels.CreateAllergyViewModel
 import com.chibee.allergy.viewmodels.CreateAllergyViewModelFactory
 import com.google.android.material.datepicker.MaterialDatePicker
-import java.util.*
+import java.util.Calendar
 
 
 class CreateAllergyFragment : Fragment() {
@@ -42,6 +44,12 @@ class CreateAllergyFragment : Fragment() {
         binding.lifecycleOwner = this
         setupDates()
 
+        viewModel!!.navigateBackToPatient.observe(viewLifecycleOwner, Observer{
+            if(it == true){
+                findNavController().navigateUp()
+                viewModel!!.doneNavigating()
+            }
+        })
         return binding.root
     }
     private fun setupDates(){
@@ -94,7 +102,5 @@ class CreateAllergyFragment : Fragment() {
         val severity = resources.getStringArray(R.array.severity)
         val arraySeverityAdapter = ArrayAdapter(requireContext(), R.layout.drug_dropdown_item, severity)
         binding.severityAutoCompleteTextView.setAdapter(arraySeverityAdapter)
-
-        resources.getStringArray(R.array.severity)
     }
 }
