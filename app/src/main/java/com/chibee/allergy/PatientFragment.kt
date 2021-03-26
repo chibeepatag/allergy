@@ -10,6 +10,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.chibee.allergy.data.AllergyDao
 import com.chibee.allergy.data.AllergyDatabase
 import com.chibee.allergy.data.PatientDao
 import com.chibee.allergy.databinding.FragmentPatientBinding
@@ -34,16 +37,36 @@ class PatientFragment : Fragment() {
         val application = requireNotNull(this.activity).application as AllergyApplication
 
         val patientDao: PatientDao = application.database.patientDao()
+        val allergyDao: AllergyDao = application.database.allergyDao()
         val arguments = PatientFragmentArgs.fromBundle(requireArguments())
 
-        val viewModelFactory = PatientViewModelFactory(patientDao, arguments.patientId)
+        val viewModelFactory = PatientViewModelFactory(patientDao, allergyDao, arguments.patientId)
         val patientViewModel = ViewModelProvider(this, viewModelFactory).get(PatientViewModel::class.java)
         binding.patientViewModel = patientViewModel
 
-        binding.addAllergy.setOnClickListener{
-            val toAddAllergy = PatientFragmentDirections.actionPatientFragmentToCreateAllergyFragment(patientViewModel.patient.value!!.patientId)
+        binding.addAllergy.setOnClickListener {
+            val toAddAllergy =
+                PatientFragmentDirections.actionPatientFragmentToCreateAllergyFragment(
+                    patientViewModel.patient.value!!.patientId
+                )
             findNavController().navigate(toAddAllergy)
         }
+
+        binding.allergyCards.layoutManager = GridLayoutManager(context, 3, RecyclerView.VERTICAL, false)
+        Log.i("GeorgeFarmer", patientViewModel.allergies.value?.size.toString())
+        val adapter = AllergyCardRecycleViewAdapter(AllergyListener { allergyId ->
+            patientViewModel.onAllergyClicked(allergyId)
+        })
+        binding.allergyCards.adapter = adapter
+
+        patientViewModel.allergies.observe(viewLifecycleOwner, Observer {
+            it?.let{
+                adapter.launchSubmitList(it)
+            }
+        })
+
+
+
         //replace with view model
         //binding.textView10.setOnClickListener{
         //    val toAllergy = PatientFragmentDirections.actionPatientFragmentToAllergyFragment()

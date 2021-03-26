@@ -11,5 +11,5 @@ interface AllergyDao {
     fun insert(allergy: Allergy)
 
     @Query("SELECT * FROM allergies where patient_id = :patientId")
-    fun getAllergies(patientId: Long): LiveData<Allergy>
+    fun getAllergies(patientId: Long): LiveData<List<Allergy>>
 }

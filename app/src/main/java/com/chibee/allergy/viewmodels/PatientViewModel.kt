@@ -2,33 +2,25 @@ package com.chibee.allergy.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.chibee.allergy.data.AllergyDatabase
-import com.chibee.allergy.data.Patient
-import com.chibee.allergy.data.PatientDao
+import com.chibee.allergy.data.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class PatientViewModel(val database: PatientDao, private val patientId: Long): ViewModel() {
-    var patient = MediatorLiveData<Patient>()
+class PatientViewModel(val patientDao: PatientDao, val allergyDao: AllergyDao, private val patientId: Long): ViewModel() {
 
+
+    var patient = MediatorLiveData<Patient>()
+    var allergies = MediatorLiveData<List<Allergy>>()
     val patientName: String?
         get() = patient.value?.patientName
 
     init {
-        patient.addSource(database.getPatient(patientId), patient::setValue)
+        patient.addSource(patientDao.getPatient(patientId), patient::setValue)
+        allergies.addSource(allergyDao.getAllergies(patientId), allergies::setValue)
     }
 
-    private fun initializePatient() {
-        viewModelScope.launch {
-           // patient = getPatient(patientId)
-        }
-    }
-
-    suspend private fun getPatient(patientId: Long): LiveData<Patient>{
-        return withContext(Dispatchers.IO) {
-            val patientCount = database.getPatient(patientId)
-            return@withContext patientCount
-        }
+    fun onAllergyClicked(allergyId: Long) {
+        Log.i("Allergy Clicked", allergyId.toString())
     }
 }
