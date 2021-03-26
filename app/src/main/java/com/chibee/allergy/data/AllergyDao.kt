@@ -12,4 +12,7 @@ interface AllergyDao {
 
     @Query("SELECT * FROM allergies where patient_id = :patientId")
     fun getAllergies(patientId: Long): LiveData<List<Allergy>>
+
+    @Query("SELECT * FROM allergies where id = :allergyId")
+    fun getAllergy(allergyId: Long): LiveData<Allergy>
 }

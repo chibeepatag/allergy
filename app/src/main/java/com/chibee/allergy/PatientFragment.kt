@@ -66,7 +66,7 @@ class PatientFragment : Fragment() {
 
         patientViewModel.navigateToAllergy.observe(viewLifecycleOwner, Observer { allergyId ->
             allergyId?.let{
-                val toAllergy = PatientFragmentDirections.actionPatientFragmentToAllergyFragment()
+                val toAllergy = PatientFragmentDirections.actionPatientFragmentToAllergyFragment(allergyId)
                 findNavController().navigate(toAllergy)
                 patientViewModel.allergyNavigated()
             }

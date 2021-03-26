@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_allergyFragment_to_chartFragment"
             app:destination="@id/chartFragment" />
+        <argument
+            android:name="allergyId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/chartFragment"

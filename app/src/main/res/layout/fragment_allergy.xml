@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="allergyViewModel"
+            type="com.chibee.allergy.viewmodels.AllergyViewModel" />
     </data>
 
     <LinearLayout
@@ -12,50 +14,53 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="@dimen/padding"
+        android:gravity="center"
         tools:context=".AllergyFragment">
 
         <TextView
             android:id="@+id/allergyDrugName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Amoxicillin" />
-
-        <TextView
-            android:id="@+id/allergyReactionLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Reaction:" />
-
+            style="@style/TextAppearance.MaterialComponents.Headline2"
+            android:text="@{allergyViewModel.allergy.drug}"
+            tools:text="Amoxicillin" />
         <TextView
             android:id="@+id/allergyReactionValue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Anaphylaxis" />
+            android:text="@{allergyViewModel.allergy.reaction}"
+            style="@style/TextAppearance.MaterialComponents.Headline4"
+            tools:text="Anaphylaxis" />
 
         <TextView
             android:id="@+id/systemsInvolvedLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Systems Involved:" />
+            android:layout_marginTop="16dp"
+            android:text="@string/systems" />
 
         <TextView
             android:id="@+id/systemsInvolvedValues"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Skin (uticaria)" />
+            android:text="@{allergyViewModel.allergy.system}"
+            tools:text="Skin (uticaria)" />
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/purple_200"
+            android:layout_marginTop="32dp"
             android:src="@drawable/ic_launcher_foreground" />
 
         <Button
             android:id="@+id/chartBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/chart" />
+            android:layout_marginTop="16dp"
+            android:text="@string/chart"
+            android:onClick="@{() -> allergyViewModel.onChart()}"/>
 
 
     </LinearLayout>
