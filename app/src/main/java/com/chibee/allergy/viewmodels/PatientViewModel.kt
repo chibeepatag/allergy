@@ -14,6 +14,9 @@ class PatientViewModel(val patientDao: PatientDao, val allergyDao: AllergyDao, p
     var allergies = MediatorLiveData<List<Allergy>>()
     val patientName: String?
         get() = patient.value?.patientName
+    private val _navigateToAllergy = MutableLiveData<Long>()
+    val navigateToAllergy
+        get() = _navigateToAllergy
 
     init {
         patient.addSource(patientDao.getPatient(patientId), patient::setValue)
@@ -22,5 +25,10 @@ class PatientViewModel(val patientDao: PatientDao, val allergyDao: AllergyDao, p
 
     fun onAllergyClicked(allergyId: Long) {
         Log.i("Allergy Clicked", allergyId.toString())
+        _navigateToAllergy.value = allergyId
+    }
+
+    fun allergyNavigated() {
+        _navigateToAllergy.value = null
     }
 }

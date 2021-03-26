@@ -53,7 +53,6 @@ class PatientFragment : Fragment() {
         }
 
         binding.allergyCards.layoutManager = GridLayoutManager(context, 3, RecyclerView.VERTICAL, false)
-        Log.i("GeorgeFarmer", patientViewModel.allergies.value?.size.toString())
         val adapter = AllergyCardRecycleViewAdapter(AllergyListener { allergyId ->
             patientViewModel.onAllergyClicked(allergyId)
         })
@@ -65,13 +64,14 @@ class PatientFragment : Fragment() {
             }
         })
 
+        patientViewModel.navigateToAllergy.observe(viewLifecycleOwner, Observer { allergyId ->
+            allergyId?.let{
+                val toAllergy = PatientFragmentDirections.actionPatientFragmentToAllergyFragment()
+                findNavController().navigate(toAllergy)
+                patientViewModel.allergyNavigated()
+            }
+        })
 
-
-        //replace with view model
-        //binding.textView10.setOnClickListener{
-        //    val toAllergy = PatientFragmentDirections.actionPatientFragmentToAllergyFragment()
-        //    findNavController().navigate(toAllergy)
-        //}
         binding.lifecycleOwner = this
 
         return binding.root

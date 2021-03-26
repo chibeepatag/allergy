@@ -14,7 +14,8 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_margin="8dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:onClick="@{() -> clickListener.onClick(allergy)}">
 
         <LinearLayout
             android:layout_width="match_parent"
