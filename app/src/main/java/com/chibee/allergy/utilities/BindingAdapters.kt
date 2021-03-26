@@ -1,10 +1,9 @@
 package com.chibee.allergy.utilities
 
-import android.widget.EditText
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.chibee.allergy.viewmodels.CreateAllergyViewModel
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
 
 @BindingAdapter("app:dateFromLong")
@@ -25,4 +24,15 @@ fun drugDateRange(view: TextView, takenStart: Long?, takenEnd: Long?){
         val formattedDateEnd = format.format(end)
         view.setText("$formattedDateStart - $formattedDateEnd")
     }
+}
+@BindingAdapter("app:age")
+fun ageFromDate(view: TextView, dob: Long){
+    val birthdate = Calendar.getInstance();
+    birthdate.timeInMillis = dob
+    val today = Calendar.getInstance()
+    var age = today.get(Calendar.YEAR) - birthdate.get(Calendar.YEAR)
+    if (today.get(Calendar.DAY_OF_YEAR) < birthdate.get(Calendar.DAY_OF_YEAR)) {
+        age--;
+    }
+    view.setText("${age.toString()} y.o.")
 }

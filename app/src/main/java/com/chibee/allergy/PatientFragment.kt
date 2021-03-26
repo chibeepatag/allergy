@@ -45,11 +45,10 @@ class PatientFragment : Fragment() {
             findNavController().navigate(toAddAllergy)
         }
         //replace with view model
-        binding.textView10.setOnClickListener{
-            val toAllergy = PatientFragmentDirections.actionPatientFragmentToAllergyFragment()
-            findNavController().navigate(toAllergy)
-
-        }
+        //binding.textView10.setOnClickListener{
+        //    val toAllergy = PatientFragmentDirections.actionPatientFragmentToAllergyFragment()
+        //    findNavController().navigate(toAllergy)
+        //}
         binding.lifecycleOwner = this
 
         return binding.root
